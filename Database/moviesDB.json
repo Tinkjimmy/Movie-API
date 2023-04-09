@@ -1,0 +1,4 @@
+{"_id":{"$oid":"6431b9cd6d5e6c989fb26cba"},"Username":"Wolly","Password":"456","Email":"wolly@gmail.com","Birth":"2001.02.03","Favourites":[{"$oid":"6431b7fa6d5e6c989fb26cb8"}]}
+{"_id":{"$oid":"6431ba326d5e6c989fb26cbb"},"Username":"Molly","Password":"789","Email":"molly@gmail.com","Birth":"2002.05.06","Favourites":[{"$oid":"6431b66e6d5e6c989fb26cb7"}]}
+{"_id":{"$oid":"6431ba7e6d5e6c989fb26cbc"},"Username":"kolly","Password":"123","Email":"kolly@gmail.com","Birth":"2008.03.05","Favourites":[{"$oid":"6431b5686d5e6c989fb26cb6"}]}
+{"_id":{"$oid":"6431bb1b6d5e6c989fb26cbe"},"Username":"Julia","Password":"852","Email":"julia@gmail.com","Birth":"1995.07.08","Favourites":[{"$oid":"6431b49e6d5e6c989fb26cb5"}]}
