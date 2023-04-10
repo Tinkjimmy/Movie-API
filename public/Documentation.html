@@ -59,38 +59,38 @@
 
       <tr>
         <td>Returns data about single movie by title</td>
-        <td>/movies/:Title</td>
+        <td>/movies/:movieTitle</td>
         <td>GET</td>
-        <td>:Title</td>
+        <td>:movieTitle</td>
         <td>-</td>
         <td>A JSON object holding data about a single movie</td>
       </tr>
 
       <tr>
-        <td>Returns data about a genre by title</td>
-        <td>/movies/Genre/:Name</td>
+        <td>Returns a description of a genre by Name</td>
+        <td>/movies/Genre/:GenreName</td>
         <td>GET</td>
-        <td>:genreName</td>
+        <td>:GenreName</td>
         <td>-</td>
         <td>A JSON object holding data about a specific genre of movie</td>
       </tr>
 
       <tr>
         <td>Returns data about a director by name</td>
-        <td>/movies/Director/:Name</td>
+        <td>/movies/Director/:DirectorName</td>
         <td>GET</td>
-        <td>:directorName</td>
+        <td>:DirectorName</td>
         <td>-</td>
         <td>A JSON object holding data about a specific director</td>
       </tr>
 
       <tr>
-        <td>Allows users to add a movie to the database</td>
-        <td>/movies</td>
+        <td>Allows users to add a movie to their favourites</td>
+        <td>/users/:Username/movies/:MovieID</td>
         <td>POST</td>
         <td>-</td>
-        <td>A JSON object holding data about the movie to add, structured like: { "Title": "String","Description": "String"}</td>
-        <td>A JSON object holding data about the movie added, structured like: { "Title: "String, "Description": "String"}</td>
+        <td>A string containing the movieID</td>
+        <td>A JSON object of the updated user's document</td>
       </tr>
 
       <tr>
@@ -98,41 +98,61 @@
         <td>/users</td>
         <td>POST</td>
         <td>-</td>
-        <td>A JSON object holding data about the user to add, structured like: { "Username": "String","Password": "String","Email": "String","Birthday": "Date" }</td>
-        <td>A JSON object holding data about the user that was added, structured like: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birthday": "1990-05-01", "Favorite Movie" : [] } </td>
-      </tr>
-
-      <tr>
-        <td>Allows users to add a movie to their favorites</td>
-        <td>/users/:Username/movies/:MovieID</td>
-        <td>POST</td>
-        <td>:id
-            :Movie
-        </td>
-        <td>-</td>
-        <td>A JSON object holding data about the user and the movie that was added</td>
+        <td>A JSON object holding data about the user to add, structured like: { "Username": "String","Password": "String","Email": "String","Birth": "Date" }</td>
+        <td>A JSON object holding data about the user that was added, structured like: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birth": "1990-05-01", "Favorite Movie" : [] } </td>
       </tr>
 
       <tr>
         <td>Allows users to remove a movie from their favorites</td>
         <td>/users/:Username/movies/:MovieID</td>
         <td>DELETE</td>
-        <td>:id
-            :Movie
+        <td>:Movieid
+            :Username
         </td>
         <td>-</td>
         <td>A JSON object holding data about the user and the movie that was removed</td>
       </tr>
 
       <tr>
-        <td>Allows existing users to deregister</td>
+        <td>Allows existing users to deregister by username</td>
         <td>/users/:Username</td>
         <td>DELETE</td>
-        <td>:id</td>
+        <td>:Username</td>
         <td>-</td>
         <td>A text message indicating whether the user has successfully deregistered</td>
       </tr>
-     </tbody>
+    
+
+     <tr>
+      <td>Allows existing users to deregister by id</td>
+      <td>/users/:_id</td>
+      <td>DELETE</td>
+      <td>:id</td>
+      <td>-</td>
+      <td>A text message indicating whether the user has successfully deregistered</td>
+    </tr>
+
+
+    <tr>
+      <td>Returns movies by genre</td>
+      <td>/movies/genre/:Genrename</td>
+      <td>GET</td>
+      <td>:Genrename</td>
+      <td>-</td>
+      <td>A JSON object with data about  the movie</td>
+    </tr>
+
+    <tr>
+      <td>Returns a description of the genre by name</td>
+      <td>/movies/genre/:Genrename</td>
+      <td>GET</td>
+      <td>:Genrename</td>
+      <td>-</td>
+      <td>A JSON object with data about  the genre</td>
+    </tr>
+
+    
+   </tbody>
      </table>
 </body>
 </html>
