@@ -250,6 +250,11 @@ app.get('/movies/director/:DirectorName',(req,res) => {
 });
 
 
+// default
+app.get("/",(req,res) => {
+  res.send("Welcome to myFlix!");
+});
+
 
 
 
