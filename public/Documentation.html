@@ -54,7 +54,22 @@
           <td>GET</td>
           <td>-</td>
           <td>-</td>
-          <td>A JSON object holding data about all the movies</td>
+          <td>A JSON object holding data about all the movies like:  {_id: ObjectId("6431b7fa6d5e6c989fb26cb8"),
+            Title: 'The Prestige',
+            Description: 'Two rival magicians engage in a fierce competition that leads to tragedy and sacrifice.',
+            Genre: {
+              Name: 'Drama',
+              Description: 'Drama is a genre of fiction characterized by serious or emotional themes and often includes conflicts between characters'
+            },
+            Director: {
+              Name: 'Christopher Nolan',
+              Bio: 'British-American filmmaker known for mind-bending films like Inception and Interstellar',
+              Birth: '1970',
+              Death: '2002'
+            },
+            ImagePath: 'ThePrestige.png',
+            Featured: false
+          }</td>
       </tr>
 
       <tr>
@@ -63,7 +78,22 @@
         <td>GET</td>
         <td>:movieTitle</td>
         <td>-</td>
-        <td>A JSON object holding data about a single movie</td>
+        <td>A JSON object holding data about a single movie like : { _id: ObjectId("6431b7fa6d5e6c989fb26cb8"),
+          Title: 'The Prestige',
+          Description: 'Two rival magicians engage in a fierce competition that leads to tragedy and sacrifice.',
+          Genre: {
+            Name: 'Drama',
+            Description: 'Drama is a genre of fiction characterized by serious or emotional themes and often includes conflicts between characters'
+          },
+          Director: {
+            Name: 'Christopher Nolan',
+            Bio: 'British-American filmmaker known for mind-bending films like Inception and Interstellar',
+            Birth: '1970',
+            Death: '2002'
+          },
+          ImagePath: 'ThePrestige.png',
+          Featured: false
+        }</td>
       </tr>
 
       <tr>
@@ -72,7 +102,7 @@
         <td>GET</td>
         <td>:GenreName</td>
         <td>-</td>
-        <td>A JSON object holding data about a specific genre of movie</td>
+        <td>A JSON object holding data about a specific genre of movie like:{ Description: "String"}</td>
       </tr>
 
       <tr>
@@ -81,7 +111,12 @@
         <td>GET</td>
         <td>:DirectorName</td>
         <td>-</td>
-        <td>A JSON object holding data about a specific director</td>
+        <td>A JSON object holding data about a specific director like: {
+          Name: "String",
+          Bio: "String",
+          Birth: "String",
+          Death: "String"
+        }</td>
       </tr>
 
       <tr>
@@ -90,7 +125,7 @@
         <td>POST</td>
         <td>-</td>
         <td>A string containing the movieID</td>
-        <td>A JSON object of the updated user's document</td>
+        <td>A JSON object of the updated user's document like: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birth": "1990-05-01", "Favorite Movie" : [] }</td>
       </tr>
 
       <tr>
@@ -110,7 +145,7 @@
             :Username
         </td>
         <td>-</td>
-        <td>A JSON object holding data about the user and the movie that was removed</td>
+        <td>A JSON object holding data about the user like: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birth": "1990-05-01", "Favorite Movie" : [] }</td>
       </tr>
 
       <tr>
@@ -119,7 +154,7 @@
         <td>DELETE</td>
         <td>:Username</td>
         <td>-</td>
-        <td>A text message indicating whether the user has successfully deregistered</td>
+        <td>A JSON object holding data about the user like: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birth": "1990-05-01", "Favorite Movie" : [] }</td>
       </tr>
     
 
@@ -139,16 +174,22 @@
       <td>GET</td>
       <td>:Genrename</td>
       <td>-</td>
-      <td>A JSON object with data about  the movie</td>
-    </tr>
-
-    <tr>
-      <td>Returns a description of the genre by name</td>
-      <td>/movies/genre/:Genrename</td>
-      <td>GET</td>
-      <td>:Genrename</td>
-      <td>-</td>
-      <td>A JSON object with data about  the genre</td>
+      <td>A JSON object with data about  the movie like  {_id: ObjectId("6431b7fa6d5e6c989fb26cb8"),
+        Title: 'The Prestige',
+        Description: 'Two rival magicians engage in a fierce competition that leads to tragedy and sacrifice.',
+        Genre: {
+          Name: 'Drama',
+          Description: 'Drama is a genre of fiction characterized by serious or emotional themes and often includes conflicts between characters'
+        },
+        Director: {
+          Name: 'Christopher Nolan',
+          Bio: 'British-American filmmaker known for mind-bending films like Inception and Interstellar',
+          Birth: '1970',
+          Death: '2002'
+        },
+        ImagePath: 'ThePrestige.png',
+        Featured: false
+      }</td>
     </tr>
 
     
