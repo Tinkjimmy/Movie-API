@@ -12,11 +12,12 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
+const cors = require('cors');
+app.use(cors());
 
-
-
-
+const { check, validationResult } = require('express-validator');
 
 
 //Models
@@ -25,10 +26,27 @@ mongoose.connect('mongodb://127.0.0.1:27017/moviesDB', { useNewUrlParser: true, 
       
       
 app.use(bodyParser.urlencoded({ extended: true}));
+
 let auth = require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
+
+
+
+
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 // login
 
@@ -45,7 +63,18 @@ app.get("/",(req,res) => {
 
 // create user
 
-app.post('/users', (req, res) => {
+app.post('/users',[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -54,7 +83,7 @@ app.post('/users', (req, res) => {
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birth: req.body.Birth
           })
