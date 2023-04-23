@@ -22,7 +22,8 @@ const { check, validationResult } = require('express-validator');
 
 //Models
 app.use(bodyParser.json());
-mongoose.connect('mongodb://127.0.0.1:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://127.0.0.1:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
       
       
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -313,6 +314,7 @@ app.use((err, req, res, next) => {
 
 
 // listen for requests
-app.listen(8080, () => {
-  console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
