@@ -118,7 +118,7 @@ app.get('/users', (req,res) => {
 
  // Get user by username
 
- app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   Users.findOne({ Username: req.params.Username })
   .then((user) => {
     res.json(user);
@@ -230,10 +230,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
   });
 });
 
-
+// passport.authenticate('jwt', { session: false }),
 
 // GET all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies',  (req, res) => {
   Movies.find()
             .then((movies) =>{
               res.status(201).json(movies);
