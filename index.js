@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
 const cors = require('cors');
-
+app.use(cors());
 
 const { check, validationResult } = require('express-validator');
 
@@ -25,10 +25,9 @@ app.use(bodyParser.json());
 // mongoose.connect('mongodb://127.0.0.1:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
       
-
       
-
 app.use(bodyParser.urlencoded({ extended: true}));
+
 let auth = require('./auth')(app);
 
 const passport = require('passport');
@@ -37,7 +36,7 @@ require('./passport');
 
 
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com',];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -119,7 +118,7 @@ app.get('/users', (req,res) => {
 
  // Get user by username
 
- app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
   .then((user) => {
     res.json(user);
@@ -231,10 +230,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
   });
 });
 
-// passport.authenticate('jwt', { session: false }),
+
 
 // GET all movies
-app.get('/movies',  (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
             .then((movies) =>{
               res.status(201).json(movies);
