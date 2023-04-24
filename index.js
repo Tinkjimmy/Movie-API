@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
 const cors = require('cors');
-app.use(cors());
+
 
 const { check, validationResult } = require('express-validator');
 
@@ -36,7 +36,7 @@ require('./passport');
 
 
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','https://movie-api-1000.herokuapp.com/'];
 
 app.use(cors({
   origin: (origin, callback) => {
