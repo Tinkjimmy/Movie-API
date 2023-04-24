@@ -25,9 +25,10 @@ app.use(bodyParser.json());
 // mongoose.connect('mongodb://127.0.0.1:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
       
-      
-app.use(bodyParser.urlencoded({ extended: true}));
 
+      
+
+app.use(bodyParser.urlencoded({ extended: true}));
 let auth = require('./auth')(app);
 
 const passport = require('passport');
