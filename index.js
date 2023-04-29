@@ -69,16 +69,16 @@ app.post('/users',[
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
-  check("Password", "password needs to have at least 8 characters").isLength({ min: 8 }),
+  // check("Password", "password needs to have at least 8 characters").isLength({ min: 8 }),
   check('Email', 'Email does not appear to be valid').isEmail(),
-  check("Birth", "birthdate must be a date").isDate()
+  // check("Birth", "birthdate must be a date").isDate()
 ], (req, res) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
 
-  let hashedPassword = Users.hashPassword(req.body.Password);
+  // let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -87,7 +87,8 @@ app.post('/users',[
         Users
           .create({
             Username: req.body.Username,
-            Password: hashedPassword,
+            // Password: hashedPassword,
+            Password: Password,
             Email: req.body.Email,
             Birth: req.body.Birth
           }).then(user =>{
