@@ -68,7 +68,7 @@ app.get("/",(req,res) => {
 
 
 
-app.post('/users',[
+app.post('/addusers',[
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
