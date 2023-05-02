@@ -65,87 +65,53 @@ app.get("/",(req,res) => {
 
 // CREATE new user
 
-app.post("/users", [
-  check("Username", "username needs to have at least 5 characters").isLength({ min: 5 }),
-  check("Username", "username contains non alphanumeric characters").isAlphanumeric(),
-  check("Password", "password is required").not().isEmpty(),
-  check("Password", "password needs to have at least 8 characters").isLength({ min: 8 }),
-  check("Email", "email does not appear to be valid").isEmail(),
+
+
+
+app.post('/users',[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail(),
   check("Birth", "birthdate must be a date").isDate()
-], (req, res) => {
+], passport.authenticate('jwt', { session: false }), (req, res) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
-  }
+    }
 
   let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username }).then(user => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
       if (user) {
-          return res.status(400).send(req.body.Username + " already exists");
+        return res.status(400).send(req.body.Username + 'already exists');
       } else {
-          Users.create({
-              Username: req.body.Username,
-              Password: hashedPassword,
-              Email: req.body.Email,
-              Birth: req.body.Birth
-          }).then(user => {
-              res.status(201).json(user);
-          }).catch(error => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-          });
-      }
-  }).catch(error => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-  });
-});
-
-
-// app.post('/users',[
-//   check('Username', 'Username is required').isLength({min: 5}),
-//   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-//   check('Password', 'Password is required').not().isEmpty(),
-//   check('Email', 'Email does not appear to be valid').isEmail(),
-//   check("Birth", "birthdate must be a date").isDate()
-// ], (req, res) => {
-//   let errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//       return res.status(422).json({ errors: errors.array() });
-//     }
-
-//   let hashedPassword = Users.hashPassword(req.body.Password);
-//   Users.findOne({ Username: req.body.Username })
-//     .then((user) => {
-//       if (user) {
-//         return res.status(400).send(req.body.Username + 'already exists');
-//       } else {
-//         Users
-//           .create({
-//             Username: req.body.Username,
-//             Password: hashedPassword,
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: hashedPassword,
             
-//             Email: req.body.Email,
-//             Birth: req.body.Birth
-//           }).then(user =>{
-//             res.status(201).json(user);
-//           }).catch(error => {
-//             console.error(error);
-//             res.status(500).send('Error: ' + error);
-//         });
-//       }
-//     }).catch(error => {
-//       console.error(error);
-//       res.status(500).send('Error: ' + error);
-//     });
-// });
+            Email: req.body.Email,
+            Birth: req.body.Birth
+          }).then(user =>{
+            res.status(201).json(user);
+          }).catch(error => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+      }
+    }).catch(error => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 
 
 
 
 // Get all users
 
-app.get('/users', (req,res) => {
+app.get('/users',passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.find()
             .then((users) =>{
               res.status(201).json(users);
