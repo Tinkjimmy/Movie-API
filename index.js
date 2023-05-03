@@ -69,7 +69,7 @@ app.get("/",(req,res) => {
 
 
 app.post('/users',[
-  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username must be at least 5 characters long').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail(),
@@ -139,7 +139,13 @@ app.get('/users', (req, res) => {
 
 //update  users by username
 
-app.put("/users/:Username", passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put("/users/:Username",[
+  check('Username', 'Username must be at least 5 characters long').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail(),
+  check("Birth", "birthdate must be a date").isDate()
+],passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const updatedUser = await Users.findOneAndUpdate(
       { Username: req.params.Username },
