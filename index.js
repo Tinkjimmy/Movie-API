@@ -146,6 +146,12 @@ app.put("/users/:Username",[
   check('Email', 'Email does not appear to be valid').isEmail(),
   check("Birth", "birthdate must be a date").isDate()
 ],passport.authenticate('jwt', { session: false }), async (req, res) => {
+  
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
   try {
     const updatedUser = await Users.findOneAndUpdate(
       { Username: req.params.Username },
