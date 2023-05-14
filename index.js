@@ -294,6 +294,7 @@ app.delete(
 );
 
 // GET all movies
+
 app.get("/movies", (req, res) => {
   Movies.find()
     .then((movies) => {
@@ -377,6 +378,7 @@ app.use((err, req, res, next) => {
 
 // listen for requests
 const port = process.env.PORT || 8080;
+
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
 });
