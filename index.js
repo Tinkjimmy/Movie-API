@@ -94,7 +94,7 @@ app.post(
     check("Email", "Email does not appear to be valid").isEmail(),
     check("Birth", "birthdate must be a date").isDate(),
   ],
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
