@@ -52,6 +52,7 @@ const { exit } = require("process");
 require("./passport");
 
 let allowedOrigins = [
+  "http://localhost:4200/",
   "http://localhost:8080",
   "http://testsite.com",
   "https://movie-api-1000.herokuapp.com",
