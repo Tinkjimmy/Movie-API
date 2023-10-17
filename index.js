@@ -53,6 +53,7 @@ require("./passport");
 
 let allowedOrigins = [
   "http://localhost:4200/welcome",
+  "http://localhost:4200/my-flix-angular/welcome",
   "http://localhost:4200/",
   "http://localhost:8080",
   "http://testsite.com",
