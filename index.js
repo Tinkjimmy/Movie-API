@@ -51,34 +51,30 @@ const passport = require("passport");
 const { exit } = require("process");
 require("./passport");
 
-// let allowedOrigins = [
-//   "http://127.0.0.1:4200/",
-//   "http://127.0.0.1:8080",
-//   "http://testsite.com",
-//   "https://movie-api-1000.herokuapp.com",
-//   "http://127.0.0.1:1234",
-//   "https://myflix-website.netlify.app",
-// ];
+let allowedOrigins = [
+  "http://127.0.0.1:4200",
+  "http://127.0.0.1:8080",
+  "http://testsite.com",
+  "https://movie-api-1000.herokuapp.com",
+  "http://127.0.0.1:1234",
+  "https://myflix-website.netlify.app",
+];
 
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       if (!origin) return callback(null, true);
-//       if (allowedOrigins.indexOf(origin) === -1) {
-//         // If a specific origin isn’t found on the list of allowed origins
-//         let message =
-//           "The CORS policy for this application doesn’t allow access from origin " +
-//           origin;
-//         return callback(new Error(message), false);
-//       }
-//       return callback(null, true);
-//     },
-//   })
-// );
-
-// Use Cross-Origin Resource Sharing
-const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        // If a specific origin isn’t found on the list of allowed origins
+        let message =
+          "The CORS policy for this application doesn’t allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 // default
 app.get("/", (req, res) => {
