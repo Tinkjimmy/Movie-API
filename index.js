@@ -52,8 +52,6 @@ const { exit } = require("process");
 require("./passport");
 
 let allowedOrigins = [
-  "http://127.0.0.1:4200/welcome",
-  "http://127.0.0.1:4200/my-flix-angular/welcome",
   "http://127.0.0.1:4200/",
   "http://127.0.0.1:8080",
   "http://testsite.com",
