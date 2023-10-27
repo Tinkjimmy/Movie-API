@@ -6,11 +6,13 @@ const path = require("path");
 const uuid = require("uuid");
 
 const app = express();
+exports.app = app;
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 
 const Movies = Models.Movie;
 const Users = Models.User;
+exports.Users = Users;
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 
@@ -81,62 +83,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
 });
 
-// CREATE new user
-
-app.post(
-  "/users",
-  [
-    check("Username", "Username must be at least 5 characters long").isLength({
-      min: 5,
-    }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed."
-    ).isAlphanumeric(),
-    check("Password", "Password is required").not().isEmpty(),
-    check("Email", "Email does not appear to be valid").isEmail(),
-    // check("Birth", "birthdate must be a date").isDate(),
-    check("Birth", "birthdate must be a date").isDateValid("Birth"),
-  ],
-  // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    let errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-
-    let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({ Username: req.body.Username })
-      .then((user) => {
-        if (user) {
-          return res.status(400).send(req.body.Username + "already exists");
-        } else {
-          Users.create({
-            Username: req.body.Username,
-            Password: hashedPassword,
-
-            Email: req.body.Email,
-            Birth: req.body.Birth,
-          })
-            .then((user) => {
-              res.status(201).json(user);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  }
-);
-function isDateValid(dateString) {
-  const date = new Date(dateString);
-  return !isNaN(date);
-}
 // Get all users
 
 app.get("/users", (req, res) => {
