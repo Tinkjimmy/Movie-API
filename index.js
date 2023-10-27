@@ -95,7 +95,7 @@ app.post(
     ).isAlphanumeric(),
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
-    // check(new Date("Birth"), "birthdate must be a date").isDate(),
+    check("Birth", "birthdate must be a date").isDate(),
   ],
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
