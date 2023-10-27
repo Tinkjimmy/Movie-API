@@ -95,7 +95,8 @@ app.post(
     ).isAlphanumeric(),
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
-    check("Birth", "birthdate must be a date").isDate(),
+    // check("Birth", "birthdate must be a date").isDate(),
+    check("Birth", "birthdate must be a date").isDateValid("Birth"),
   ],
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -132,7 +133,10 @@ app.post(
       });
   }
 );
-
+function isDateValid(dateString) {
+  const date = new Date(dateString);
+  return !isNaN(date);
+}
 // Get all users
 
 app.get("/users", (req, res) => {
