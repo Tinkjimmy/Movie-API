@@ -54,6 +54,7 @@ require("./passport");
 let allowedOrigins = [
   "https://tinkjimmy.github.io/my-flix-angular-client/welcome",
   "http://127.0.0.1:4200",
+  "http://localhost:4200",
   "http://127.0.0.1:8080",
   "http://testsite.com",
   "https://movie-api-1000.herokuapp.com",
@@ -301,7 +302,7 @@ app.delete(
 
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
