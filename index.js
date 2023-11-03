@@ -52,6 +52,7 @@ const { exit } = require("process");
 require("./passport");
 
 let allowedOrigins = [
+  "https://tinkjimmy.github.io/My-Flix-Angular_client-2",
   "https://tinkjimmy.github.io",
   "http://127.0.0.1:4200",
   "http://localhost:4200",
