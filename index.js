@@ -136,8 +136,14 @@ app.post(
   }
 );
 
-// Get all users
+/**
+ * URL endpoints
+ */
 
+
+/**
+ * READ get all users
+ */
 app.get("/users", (req, res) => {
   Users.find()
     .then((users) => {
@@ -149,7 +155,9 @@ app.get("/users", (req, res) => {
     });
 });
 
-// Get user by username
+/**
+ * READ Get a user by username 
+ */
 
 app.get(
   "/users/:Username",
@@ -166,8 +174,9 @@ app.get(
   }
 );
 
-//update  users by username
-
+/**
+ * CREATE Add new user
+ */
 app.put(
   "/users/:Username",
   [
@@ -211,8 +220,9 @@ app.put(
   }
 );
 
-// Add a movie to a user's list of favorites
-
+/**
+ * UPDATE Edit user details
+ */
 app.post(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -234,8 +244,9 @@ app.post(
   }
 );
 
-//remove a movie from list of favorites
-
+/**
+ * CREATE User add movie to list of favorites
+ */
 app.delete(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -257,8 +268,9 @@ app.delete(
   }
 );
 
-// Delete a user by username
-
+  /**
+   * DELETE User remove movie from list of favorites
+   */
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -278,8 +290,9 @@ app.delete(
   }
 );
 
-// delete user by id
-
+/**
+* DELETE Delete user account
+*/
 app.delete(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
@@ -299,7 +312,9 @@ app.delete(
   }
 );
 
-// GET all movies
+/**
+ * READ Get list of all movies 
+ */
 
 app.get(
   "/movies",
@@ -316,7 +331,9 @@ app.get(
   }
 );
 
-// GET movie by title
+/**
+ * READ Get info about a movie by title 
+ */
 app.get(
   "/movies/:movieTitle",
   passport.authenticate("jwt", { session: false }),
@@ -332,7 +349,9 @@ app.get(
   }
 );
 
-// get movies by Genre
+/**
+ * READ Get info about genre
+ */
 
 app.get(
   "/movies/Genre/:Genrename",
@@ -349,7 +368,9 @@ app.get(
   }
 );
 
-// get genre description by genre name
+/**
+ * READ Get info about director
+ */
 app.get(
   "movies/Genre/:GenreName",
   passport.authenticate("jwt", { session: false }),
@@ -365,7 +386,9 @@ app.get(
   }
 );
 
-// //Director by name
+/**
+ *  GET Director by name
+ */
 app.get(
   "/movies/director/:DirectorName",
   passport.authenticate("jwt", { session: false }),
